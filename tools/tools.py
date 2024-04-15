@@ -68,13 +68,14 @@ class User(BaseModel):
     gender : Union[bool, None] = None
 
 class Patient(BaseModel):
-    name: Union[str, None] = None
-    age: Union[int, None] = None
-    address: Union[str, None] = None
-    note: Union[str, None] = None
+    name_patient: Union[str, None] = None
+    dob: Union[datetime, None] = None #sua lai thanh dob
+    address_patient: Union[str, None] = None
+    chart_params: Union[str, None] = None
+    note_case: Union[str, None] = None
     detail: Union[str, None] = None
     treatment: Union[str, None] = None
-    avartar: Union[str,None] = None
+    avatar: Union[str,None] = None
 
 class PatientInDB(Patient):
     user_id : int 
@@ -136,13 +137,13 @@ def create_access_token(data: dict, expires_delta: Union[timedelta, None] = None
     encoded_jwt = jwt.encode(to_encode, SECRET_KEY, algorithm=ALGORITHM)
     return encoded_jwt
 
-def get_questions_by_patient_id(patient_id):
-    with open('\innogreen-be\data\questions_set.json', 'r') as file:
+def get_questions_by_patient_id(num_month):
+    with open(r'data/questions_set.json', 'r', encoding="utf-8") as file:
         question_data = json.load(file)
     
     for patient_questions in question_data:
         for patient_key, questions in patient_questions.items():
-            if patient_key == str(patient_id):
+            if patient_key == str(num_month):
                 return questions
             
     return None

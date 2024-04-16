@@ -1,6 +1,17 @@
 from tools.tools import *
 from fastapi import FastAPI
+<<<<<<< HEAD
 from router import chat,current_user,get_question_patient,patients,survey,users
+=======
+from router import (chat, 
+                    current_user,
+                    get_question_patient,
+                    # get_text_intro,
+                    patients,
+                    survey,
+                    users,
+                    get_all_patients)
+>>>>>>> 70f0adcd9a0a07ce25ac6623bee77f533dea128f
 import os
 from fastapi.staticfiles import StaticFiles
 from fastapi import FastAPI, __version__
@@ -32,9 +43,10 @@ app.include_router(users.router)
 app.include_router(current_user.router)
 app.include_router(get_question_patient.router)
 app.include_router(patients.router)
+app.include_router(get_all_patients.router)
 app.include_router(chat.router)
 app.include_router(survey.router)
-
+# ccc hsdsad
 
 if __name__ == "__main__":
     import uvicorn

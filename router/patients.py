@@ -16,9 +16,9 @@ async def create_patient_profile(patient : Patient, access_token: str = Depends(
     token_data = decode_bearer_token(access_token)
     id_user,_ = get_user(conn, token_data.email)
     table_name = "patients"
-    columns= "user_id, name_patient, age_patient, address_patient, path_img_chart, note_case, detail, treatment"
+    columns= "user_id, name, age, address, note_case, detail, treatment"
     insert_query = f'INSERT INTO {table_name} ({columns}) VALUES (%s, %s, %s, %s, %s, %s, %s, %s)'
-    data_insert = (id_user,patient.name_patient,patient.age_patient,patient.address_patient,patient.path_img_chart,patient.note_case,patient.detail, patient.treatment)
+    data_insert = (id_user, patient.name, patient.age, patient.address, patient.note_case, patient.detail, patient.treatment)
     cursor.execute(insert_query, data_insert)
     conn.commit()
     conn.close()

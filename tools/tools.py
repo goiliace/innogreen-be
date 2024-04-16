@@ -68,17 +68,16 @@ class User(BaseModel):
     gender : Union[bool, None] = None
 
 class Patient(BaseModel):
-    name_patient: Union[str, None] = None
-    age_patient : Union[int, None] = None
-    address_patient : Union[str, None] = None
-    path_img_chart : Union[str, None] = None 
-    note_case : Union[str, None] = None
-    detail : Union[str, None] = None
-    treatment : Union[str, None] = None
-    avartar : Union[str,None] = None
+    name: Union[str, None] = None
+    age: Union[int, None] = None
+    address: Union[str, None] = None
+    note: Union[str, None] = None
+    detail: Union[str, None] = None
+    treatment: Union[str, None] = None
+    avartar: Union[str,None] = None
+
 class PatientInDB(Patient):
     user_id : int 
-
 
 class UserInDB(User):
     hashed_password: str

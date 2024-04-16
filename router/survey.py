@@ -9,7 +9,8 @@ router = APIRouter()
 class SurveyQuestion(BaseModel):
     id: int
     content: str
-    answer: str
+    answer_A: str
+    answer_B: str
 
 class SurveyResponse(BaseModel):
     type: str

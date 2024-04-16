@@ -15,7 +15,7 @@ class UserCreate(BaseModel):
     gender : Union[bool, None] = None
 class RegisterResponse(BaseModel):
     status: bool
-# @app.post("/register/",response_model=User, status_code=status.HTTP_201_CREATED)
+
 @router.post("/register/",response_model=RegisterResponse, status_code=status.HTTP_201_CREATED)
 async def register(user: UserCreate):
     conn = create_connection()

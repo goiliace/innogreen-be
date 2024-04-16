@@ -1,5 +1,5 @@
 from tools.tools import *
-from fastapi import FastAPI
+from fastapi import FastAPI, UploadFile
 from router import (chat, 
                     current_user,
                     get_question_patient,
@@ -8,6 +8,7 @@ from router import (chat,
                     survey,
                     users,
                     get_all_patients)
+import base64
 import os
 from fastapi.staticfiles import StaticFiles
 from fastapi import FastAPI, __version__
@@ -34,6 +35,14 @@ app.mount("/static", StaticFiles(directory="static"), name="static")
 @app.get("/")
 def router():
     return {"message": "API from Dumplings team project"}
+
+@app.post("/uploadfile/")
+async def create_upload_file(file: UploadFile):
+    # convert file to base64 string
+    base64_file = file.file.read()
+
+    base64_file = base64.b64encode(base64_file).decode('utf-8')
+    return {"filename": file.filename, "filetype": file.content_type, "base64_file": base64_file}
 
 app.include_router(users.router)
 app.include_router(current_user.router)

@@ -36,7 +36,6 @@ app.include_router(chat.router)
 app.include_router(survey.router)
 app.include_router(get_all_patients.router)
 
-
 if __name__ == "__main__":
     import uvicorn
     uvicorn.run(app, host="127.0.0.1", port=4040)	

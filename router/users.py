@@ -13,6 +13,7 @@ class UserCreate(BaseModel):
     phone_number : Union[str, None] = None
     avatar : Union[str, None] = None
     gender : Union[bool, None] = None
+    
 class RegisterResponse(BaseModel):
     status: bool
 
@@ -27,7 +28,7 @@ async def register(user: UserCreate):
     table_name = "users"
     columns= "email, hashed_password, role, full_name, phone_number, avatar, gender"
     insert_query = f'INSERT INTO {table_name} ({columns}) VALUES (%s, %s, %s, %s, %s, %s, %s)'
-    data_insert = (user.email,get_password_hash(user.password),user.role, user.full_name,user.phone_number,user.avatar ,user.gender) 
+    data_insert = (user.email, get_password_hash(user.password), user.role, user.full_name, user.phone_number, user.avatar ,user.gender) 
     cursor.execute(insert_query, data_insert)
 
     conn.commit()

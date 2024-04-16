@@ -9,8 +9,8 @@ router = APIRouter()
 class SurveyQuestion(BaseModel):
     id: int
     content: str
-    answer_A: str
-    answer_B: str
+    answer_A: bool
+    answer_B: bool
 
 class SurveyResponse(BaseModel):
     type: str
@@ -26,6 +26,7 @@ class SurveyResult(BaseModel):
     cnxh_p: int
     k_p: int
     token: str
+    
 
 
 @router.post("/survey_result/", status_code=status.HTTP_201_CREATED)

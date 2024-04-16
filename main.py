@@ -1,8 +1,5 @@
 from tools.tools import *
 from fastapi import FastAPI
-<<<<<<< HEAD
-from router import chat,current_user,get_question_patient,patients,survey,users
-=======
 from router import (chat, 
                     current_user,
                     get_question_patient,
@@ -11,7 +8,6 @@ from router import (chat,
                     survey,
                     users,
                     get_all_patients)
->>>>>>> 70f0adcd9a0a07ce25ac6623bee77f533dea128f
 import os
 from fastapi.staticfiles import StaticFiles
 from fastapi import FastAPI, __version__
@@ -51,4 +47,3 @@ app.include_router(survey.router)
 if __name__ == "__main__":
     import uvicorn
     uvicorn.run(app, host="127.0.0.1", port=4040)	
-

@@ -59,6 +59,7 @@ class TokenData(BaseModel):
     email: Union[str, None] = None
     
 class User(BaseModel):
+    id: Union[str, None] = None
     email: str
     role: Union[str, None] = None
     full_name: Union[str, None] = None
@@ -120,7 +121,7 @@ def get_user(conn, email: str):
     cursor.execute(f"SELECT * FROM users WHERE email = '{email}'")
     result = cursor.fetchone()
     if result:
-        return result[0],UserInDB(email=result[1],hashed_password=result[2],role=result[3],full_name=result[4],phone_number=result[5],avatar=result[6],gender=result[7])
+        return result[0],UserInDB(id=result[0],email=result[1],hashed_password=result[2],role=result[3],full_name=result[4],phone_number=result[5],avatar=result[6],gender=result[7])
 
 def check_dupli_user_or_email(conn, email: str):
     cursor = create_cursor(conn)

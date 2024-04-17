@@ -3,33 +3,43 @@ from fastapi import  FastAPI,status ,APIRouter,Depends
 from .current_user import *
 
 router = APIRouter()
-@router.get("/get_all_patients/", status_code=status.HTTP_201_CREATED)
+@router.get("/user/get_all_patients")
 async def get_all_patients(access_token: str = Depends(oauth2_scheme)):
-    try:
-        user_id = get_user_id_from_token(access_token)
+    # try:
         conn = create_connection()
         if conn is None:
             return {"error": "Failed to connect to the database"}
-        cur = conn.cursor()
-        cur.execute("SELECT * FROM patients WHERE user_id = %s", (user_id,))
-        rows = cur.fetchall()
+        token_data = decode_bearer_token(access_token)
+        user_id,_ = get_user(conn, token_data.email)
+        # user_id,_ = get_user(access_token)
+        print(user_id)
+        cursor = create_cursor(conn)
+        cursor.execute("ROLLBACK")
+        table_name = "patients"
+        columns = "patient_id, name_patient, dob, address_patient, chart_params, note_case, detail, treatment, avatar"
+        select_query = f"SELECT {columns} FROM {table_name} WHERE user_id = '{user_id}'"
+
+        cursor.execute(select_query)
+        rows = cursor.fetchall()
         patients = []
         for row in rows:
             patient = {
-                "id": row[0],
-                "name": row[1],
-                "age": row[2],
-                "avatar": row[3],
-                "note": row[4],
-                "treatment": row[5], 
-                "avatar": row[6],
-                "detail": row[7]  
+                "id_patients": row[0],
+                "name_patient": row[1],
+                "dob": row[2],
+                "address_patient": row[3],
+                "chart_params": row[4],
+                "note_case": row[5],
+                "detail": row[6],
+                "treatment": row[7],
+                "avatar": row[8]
             }
             patients.append(patient)
-        cur.close()
+        conn.commit()
         conn.close()
 
         return {"patients": patients}
 
-    except Exception as e:
-        return {"error": str(e)}
+    # except Exception as e:
+    #     return {"error": str(e),
+    #             "id": user_id}

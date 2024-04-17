@@ -1,6 +1,13 @@
 from tools.tools import *
 from fastapi import FastAPI
-from router import chat, current_user, get_question_patient, get_text_intro, patients, survey, users, get_all_patients
+from router import (chat, 
+                    current_user,
+                    get_question_patient,
+                    # get_text_intro,
+                    patients,
+                    survey,
+                    users,
+                    get_all_patients)
 import os
 from fastapi.staticfiles import StaticFiles
 from fastapi import FastAPI, __version__
@@ -32,9 +39,11 @@ app.include_router(users.router)
 app.include_router(current_user.router)
 app.include_router(get_question_patient.router)
 app.include_router(patients.router)
+app.include_router(get_all_patients.router)
 app.include_router(chat.router)
 app.include_router(survey.router)
 app.include_router(get_all_patients.router)
+
 
 if __name__ == "__main__":
     import uvicorn

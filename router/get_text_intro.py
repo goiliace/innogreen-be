@@ -3,6 +3,7 @@ sys.path.append('./')
 from tools.tools import *
 from fastapi import FastAPI, Depends, HTTPException, status, APIRouter
 
+
 router = APIRouter()
 @router.get("/info")
 async def register():

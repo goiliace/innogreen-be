@@ -9,7 +9,6 @@ import base64
 router = APIRouter()
 @router.post("/user/create_patient_profile/", status_code=status.HTTP_201_CREATED)
 async def create_patient_profile(patient : Patient=Depends(Patient.as_form), access_token: str = Depends(oauth2_scheme)): 
-
     conn = create_connection()
     cursor = create_cursor(conn)
     cursor.execute("ROLLBACK")
@@ -31,6 +30,3 @@ async def create_patient_profile(patient : Patient=Depends(Patient.as_form), acc
     conn.close()
     return {"message": "Create patient profile successfully"}
 
-# if __name__ == "__main__":
-#     import uvicorn
-#     uvicorn.run(app, host="0.0.0.0", port=8000)	

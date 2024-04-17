@@ -27,7 +27,3 @@ async def get_current_user(access_token: str = Depends(oauth2_scheme)):
     conn.close()
     return user
 
-
-# if __name__ == '__main__':
-#     import uvicorn
-#     uvicorn.run(app, host="127.0.0.1", port=8000)

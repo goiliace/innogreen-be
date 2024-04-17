@@ -51,7 +51,8 @@ app.include_router(patients.router)
 app.include_router(get_all_patients.router)
 app.include_router(chat.router)
 app.include_router(survey.router)
-# ccc hsdsad
+app.include_router(get_all_patients.router)
+
 
 if __name__ == "__main__":
     import uvicorn

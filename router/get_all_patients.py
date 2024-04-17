@@ -12,7 +12,7 @@ async def get_all_patients(access_token: str = Depends(oauth2_scheme)):
         token_data = decode_bearer_token(access_token)
         user_id,_ = get_user(conn, token_data.email)
         # user_id,_ = get_user(access_token)
-        print(user_id)
+        # print(user_id)
         cursor = create_cursor(conn)
         cursor.execute("ROLLBACK")
         table_name = "patients"

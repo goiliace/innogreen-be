@@ -7,7 +7,9 @@ from router import (chat,
                     patients,
                     survey,
                     users,
-                    get_all_patients)
+                    get_all_patients,
+                    get_history_chat,
+                    push_history_chat)
 import base64
 import os
 from fastapi.staticfiles import StaticFiles
@@ -52,7 +54,8 @@ app.include_router(get_all_patients.router)
 app.include_router(chat.router)
 app.include_router(survey.router)
 app.include_router(get_all_patients.router)
-
+app.include_router(get_history_chat.router)
+app.include_router(push_history_chat.router)
 
 if __name__ == "__main__":
     import uvicorn

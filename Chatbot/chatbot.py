@@ -19,16 +19,17 @@ from langchain.prompts.chat import (
 )
 from os.path import join, dirname
 from dotenv import load_dotenv
-from Chatbot.prompt import TEMPLATE_SYSTEM
+from .prompt import TEMPLATE_SYSTEM
 from langchain.chains import RetrievalQA
 from langchain.prompts import PromptTemplate
 
 from uuid import uuid4
-print(dirname(__file__))
-dotenv_path = join(dirname(__file__), '../.env')
-load_dotenv(dotenv_path)
+# print(dirname(__file__))
+# dotenv_path = join(dirname(__file__), '../.env')
+load_dotenv('../.env')
 # str(uuid4())
 os.environ['OPENAI_API_KEY']=os.getenv("OPENAI_API_KEY")
+# print(os.environ['OPENAI_API_KEY'])
 class Chatbot:
     def __init__(self, 
                  session_id,
@@ -39,7 +40,7 @@ class Chatbot:
                                                 input_key="question")
         # self.zep_memory = 
         self.session_id = session_id  # This is a unique identifier for the user/session
-        self.session_id ="996171c3-747a-439c-91b5-1ce4ed4ecbca"
+        # self.session_id ="996171c3-747a-439c-91b5-1ce4ed4ecbca"
         # Initialize the Zep Memory Class
         self.bi_enc_dict = {
                         'OpenAI Embedding': 'openai-gpt',

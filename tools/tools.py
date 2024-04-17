@@ -152,13 +152,23 @@ def create_access_token(data: dict, expires_delta: Union[timedelta, None] = None
     encoded_jwt = jwt.encode(to_encode, SECRET_KEY, algorithm=ALGORITHM)
     return encoded_jwt
 
-def get_questions_by_patient_id(num_month):
+def get_questions_by_patient_id(id_month):
     with open(r'data/questions_set.json', 'r', encoding="utf-8") as file:
         question_data = json.load(file)
     
     for patient_questions in question_data:
         for patient_key, questions in patient_questions.items():
-            if patient_key == str(num_month):
+            if patient_key == str(id_month):
                 return questions
             
     return None
+
+def calculate_month(dob):
+    current_date = datetime.now()
+    # dob = dob.replace(tzinfo=None)
+    num_month = (current_date.year - dob.year) * 12 + current_date.month - dob.month
+    # print(num_month)
+    return num_month
+
+def find_nearest_number(numbers, target):
+    return min(numbers, key=lambda x: abs(x - target))

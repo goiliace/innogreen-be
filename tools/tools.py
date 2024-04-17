@@ -1,12 +1,12 @@
 from jose import JWTError, jwt
 from passlib.context import CryptContext
 from pydantic import BaseModel
-from typing import Union
+from typing import Union, Annotated
 from datetime import datetime, timedelta, timezone
 from fastapi.security import OAuth2PasswordBearer, OAuth2PasswordRequestForm
 import psycopg2
 import os
-from fastapi import  HTTPException, status, Depends, APIRouter
+from fastapi import  HTTPException, status, Depends, APIRouter, File, UploadFile, Form
 import json
 
 from dotenv import load_dotenv
@@ -74,7 +74,22 @@ class Patient(BaseModel):
     note_case: Union[str, None] = None
     detail: Union[str, None] = None
     treatment: Union[str, None] = None
-    avatar: Union[str,None] = None
+    avatar: Union[UploadFile, None] = None
+    @classmethod
+    def as_form(
+        cls,
+        name_patient: str = Form(...),
+        dob: datetime = Form(...),
+        address_patient: str = Form(...),
+        avatar: Union[UploadFile, None] = None
+        
+    ):
+        return cls(
+            name_patient=name_patient,
+            dob=dob,
+            address_patient=address_patient,
+            avatar=avatar
+        )
 
 class PatientInDB(Patient):
     user_id : int 

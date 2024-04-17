@@ -75,14 +75,14 @@ class Patient(BaseModel):
     note_case: Union[str, None] = None
     detail: Union[str, None] = None
     treatment: Union[str, None] = None
-    avatar: UploadFile = File(...)
+    avatar: Union[UploadFile, None] = None
     @classmethod
     def as_form(
         cls,
         name_patient: str = Form(...),
         dob: datetime = Form(...),
         address_patient: str = Form(...),
-        avatar: UploadFile = File(...),
+        avatar: Union[UploadFile, None] = None
         
     ):
         return cls(

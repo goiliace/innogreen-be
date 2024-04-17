@@ -12,10 +12,10 @@ router = APIRouter()
 class Message(BaseModel):
     message: str
 
-@router.get('/chat/')
-async def predict(message: Message, access_token: str = Depends(oauth2_scheme)):
+@router.post('/chat/')
+async def chat(message: Message, access_token: str = Depends(oauth2_scheme)):
     # response = chatbot.Chatbot(str(uuid4()))
     print(message.message)
     # ans = response(message.message)
     ans = "highihi"
-    return JSONResponse(content={"answer": ans})
+    return JSONResponse(content={"answer": message.message})

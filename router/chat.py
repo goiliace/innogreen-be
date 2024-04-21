@@ -19,7 +19,7 @@ async def chat(message: Message, access_token: str = Depends(oauth2_scheme)):
     cursor.execute("ROLLBACK")
     token_data = decode_bearer_token(access_token)
     id_user, _ = get_user(conn, token_data.email)
-    response = chatbot.Chatbot(id_user)
+    # response = chatbot.Chatbot(id_user)
     table_name = "history_chat"
     columns='id_user,message,"user","time"'
     insert_query = f'INSERT INTO {table_name} ({columns}) VALUES (%s, %s, %s, %s)'
@@ -27,7 +27,7 @@ async def chat(message: Message, access_token: str = Depends(oauth2_scheme)):
     cursor.execute(insert_query, data_insert_user)
     # print(message.message)
     # print(response(message.message))
-    ans = response(message.message)
+    ans = "example ans"#response(message.message)
     data_insert_bot = (id_user, ans, "Assistance", datetime.now())
     cursor.execute(insert_query, data_insert_bot)
     conn.commit()

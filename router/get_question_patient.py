@@ -8,13 +8,12 @@ class Patient_id(BaseModel):
     patient_id: str
 
 router = APIRouter()
-@router.get("/user/get_question_patient/", status_code=status.HTTP_201_CREATED)
-async def get_question_patient(form_data: Patient_id, access_token: str = Depends(oauth2_scheme)): 
+@router.get("/patient/questions", status_code=status.HTTP_201_CREATED)
+async def get_question_patient(patient_id: str, access_token: str = Depends(oauth2_scheme)): 
     conn = create_connection()
     cursor = create_cursor(conn)
     cursor.execute("ROLLBACK")
     token_data = decode_bearer_token(access_token)
-    patient_id = form_data.patient_id
     table_name = "patients"
     columns = "dob"
     select_query = f"SELECT {columns} FROM {table_name} WHERE patient_id = '{patient_id}'"

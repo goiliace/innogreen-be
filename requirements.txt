@@ -15,3 +15,4 @@ pdfminer
 bs4
 tiktoken
 faiss-cpu
+gunicorn==22.0.0
